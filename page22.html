@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industry Projects in IT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #fff8e1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-left: 15px solid #ffc107;
+            border-top: 10px solid #ffc107;
+        }
+        h1, h2, h3 {
+            color: #333;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #ffecb3;
+            border-left: 7px solid #ffc107;
+            border-bottom: 5px solid #ffc107;
+        }
+        .hidden {
+            display: none;
+        }
+        button {
+            background-color: #ffc107;
+            color: black;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            background-color: #ffb300;
+            transform: scale(1.05);
+            box-shadow: 0 0 10px #ffeb3b;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li::before {
+            content: "\2714";
+            color: green;
+            margin-right: 8px;
+        }
+    </style>
+    <script>
+        function toggleSection(id) {
+            var section = document.getElementById(id);
+            if (section.style.display === "none" || section.style.display === "") {
+                section.style.display = "block";
+            } else {
+                section.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Industry Projects in IT: Real-World Applications</h1>
+        
+        <div class="section">
+            <button onclick="toggleSection('project-intro')">What are Industry Projects?</button>
+            <div id="project-intro" class="hidden">
+                <ul>
+                    <li>Real-world problems solved using technology</li>
+                    <li>Collaboration between companies and developers</li>
+                    <li>Enhance technical and soft skills</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <button onclick="toggleSection('key-projects')">Industry-Oriented Projects by Domain</button>
+            <div id="key-projects" class="hidden">
+                <ul>
+                    <li><button onclick="toggleSection('data-science')">Data Science & AI</button>
+                        <div id="data-science" class="hidden">
+                            <ul>
+                                <li>Customer Segmentation - AI groups customers based on behavior.</li>
+                                <li>Sentiment Analysis - Analyzes customer reviews using NLP.</li>
+                                <li>Fraud Detection - Identifies fraudulent transactions using ML.</li>
+                                <li>Recommendation Systems - Suggests products based on user activity.</li>
+                                <li>AI-Based Virtual Assistant - Provides automated responses to queries.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><button onclick="toggleSection('ui-ux')">UI/UX</button>
+                        <div id="ui-ux" class="hidden">
+                            <ul>
+                                <li>Responsive Website Design - Mobile-friendly web applications.</li>
+                                <li>Interactive Prototypes - Clickable UI mockups for applications.</li>
+                                <li>Accessibility-Focused Design - UI optimized for disabled users.</li>
+                                <li>User Behavior Analytics - Tracks interactions to improve UX.</li>
+                                <li>Dark Mode Integration - Provides a dark theme for applications.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><button onclick="toggleSection('network-it')">Network & IT Infrastructure</button>
+                        <div id="network-it" class="hidden">
+                            <ul>
+                                <li>Cloud Network Monitoring - Monitors cloud-based network performance.</li>
+                                <li>Firewall Security Implementation - Enhances network security.</li>
+                                <li>Load Balancing System - Distributes network traffic efficiently.</li>
+                                <li>Network Automation Tool - Automates network configuration.</li>
+                                <li>Wireless Security Solutions - Secures WiFi networks.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><button onclick="toggleSection('it-support')">IT Support</button>
+                        <div id="it-support" class="hidden">
+                            <ul>
+                                <li>Automated Help Desk - AI-driven customer support system.</li>
+                                <li>Remote IT Assistance - Provides IT support remotely.</li>
+                                <li>Hardware Diagnostics Tool - Identifies system hardware issues.</li>
+                                <li>Patch Management System - Automates software updates.</li>
+                                <li>Data Recovery Solutions - Recovers lost or corrupted data.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><button onclick="toggleSection('game-dev')">Game Development</button>
+                        <div id="game-dev" class="hidden">
+                            <ul>
+                                <li>2D Platformer Game - A simple 2D adventure game.</li>
+                                <li>Multiplayer Battle Arena - Online battle game with real players.</li>
+                                <li>VR Exploration Game - Virtual reality-based gaming experience.</li>
+                                <li>AI-Powered NPCs - Intelligent non-playable characters.</li>
+                                <li>Physics-Based Puzzle Game - Interactive puzzle-solving game.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <button onclick="toggleSection('benefits-projects')">Benefits of Industry Projects</button>
+            <div id="benefits-projects" class="hidden">
+                <ul>
+                    <li>Gain hands-on experience with real-world applications</li>
+                    <li>Improve teamwork and problem-solving skills</li>
+                    <li>Increase job opportunities and career growth</li>
+                    <li>Build a strong portfolio for tech careers</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

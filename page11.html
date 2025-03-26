@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soft & Hard Skills in IT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-left: 15px solid #ffcc00;
+        }
+        h1, h2, h3 {
+            color: #333;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #fffbea;
+            border-left: 7px solid #ffcc00;
+        }
+        .hidden {
+            display: none;
+        }
+        button {
+            background-color: #ffcc00;
+            color: #333;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: background 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #e6b800;
+            transform: scale(1.05);
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li::before {
+            content: "\2714";
+            color: green;
+            margin-right: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #333;
+            color: white;
+        }
+    </style>
+    <script>
+        function toggleSection(id) {
+            var section = document.getElementById(id);
+            if (section.style.display === "none" || section.style.display === "") {
+                section.style.display = "block";
+            } else {
+                section.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Soft Skills in the IT Industry: Importance & Real-World Applications</h1>
+        
+        <div class="section">
+            <button onclick="toggleSection('soft-skills')">What are Soft Skills?</button>
+            <div id="soft-skills" class="hidden">
+                <ul>
+                    <li>Essential for teamwork, leadership, and innovation</li>
+                    <li>Improve problem-solving and decision-making</li>
+                    <li>Help in career growth and management roles</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <button onclick="toggleSection('key-soft-skills')">Key Soft Skills for IT Professionals</button>
+            <div id="key-soft-skills" class="hidden">
+                <ul>
+                    <li><strong>Communication Skills</strong> – Explain technical concepts clearly.</li>
+                    <li><strong>Problem-Solving & Critical Thinking</strong> – Debugging and system optimization.</li>
+                    <li><strong>Teamwork & Collaboration</strong> – Working in Agile teams.</li>
+                    <li><strong>Adaptability & Continuous Learning</strong> – Keeping up with new technologies.</li>
+                    <li><strong>Time Management & Organization</strong> – Meeting deadlines and improving productivity.</li>
+                    <li><strong>Emotional Intelligence (EQ)</strong> – Handling stress and workplace relationships.</li>
+                    <li><strong>Leadership & Decision-Making</strong> – Leading teams and project management.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <button onclick="toggleSection('soft-vs-hard')">Soft Skills vs. Hard Skills</button>
+            <div id="soft-vs-hard" class="hidden">
+                <table>
+                    <tr>
+                        <th>Soft Skills</th>
+                        <th>Hard Skills</th>
+                    </tr>
+                    <tr>
+                        <td>Communication</td>
+                        <td>Programming (Python, Java)</td>
+                    </tr>
+                    <tr>
+                        <td>Problem-Solving</td>
+                        <td>Cybersecurity, AI/ML</td>
+                    </tr>
+                    <tr>
+                        <td>Teamwork</td>
+                        <td>Cloud Computing (AWS, Azure)</td>
+                    </tr>
+                    <tr>
+                        <td>Adaptability</td>
+                        <td>Full-Stack Development</td>
+                    </tr>
+                    <tr>
+                        <td>Leadership</td>
+                        <td>Data Analytics (SQL, Power BI)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="section">
+            <button onclick="toggleSection('improve-soft-skills')">How to Improve Soft Skills?</button>
+            <div id="improve-soft-skills" class="hidden">
+                <ul>
+                    <li>Join open-source projects (GitHub)</li>
+                    <li>Participate in hackathons & coding challenges</li>
+                    <li>Take online soft skills courses (LinkedIn Learning, Coursera)</li>
+                    <li>Attend networking events & tech meetups</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

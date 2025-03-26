@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Page 📝</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f8f8;
+            padding: 20px;
+        }
+        .quiz-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            margin: auto;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .options {
+            text-align: left;
+            margin: 10px 0;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .next-btn {
+            background: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .result {
+            font-size: 20px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2>Quiz 🎯</h2>
+        <div id="question-container"></div>
+        <button class="next-btn" onclick="nextQuestion()">Next ➡️</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        const questions = [
+             { question: "What excites you the most about technology? 🤩", options: ["💻 Building websites and web applications", "📱 Creating mobile apps", "🔒 Designing secure systems to prevent cyber threats", "📊 Analyzing large amounts of data for insights", "🤖 Automating tasks using AI", "🖧 Managing networks and servers", "🎮 Developing software and games", "⚙️ Working with hardware and embedded systems", "☁️ Cloud computing and managing online infrastructure", "👨‍💼 Leading tech projects and managing teams"], answer: null },
+            { question: "Do you prefer working with visual designs 🎨 or logical problem-solving 🧠?", options: ["I enjoy designing and creating user-friendly experiences", "I love solving complex logical problems", "I like both equally"], answer: null },
+            { question: "How do you feel about math and algorithms? 🔢", options: ["Love them! I enjoy solving math problems", "I can work with them, but I prefer practical applications", "I don’t enjoy them much but love working with technology"], answer: null },
+            { question: "Would you rather develop software from scratch 🏗️ or analyze existing systems to improve them 🔍?", options: ["I love creating new things from scratch", "I prefer analyzing data and improving existing systems"], answer: null },
+            { question: "Which of these sounds most interesting to you? 🤔", options: ["🖥️ Making interactive websites", "📱 Creating mobile apps", "🔐 Stopping hackers and securing data", "📈 Finding patterns in data to make decisions", "🤖 Training AI models to perform tasks", "🖧 Managing IT infrastructure and networks", "🎮 Building games and simulations", "⚙️ Working with robots and embedded systems", "☁️ Hosting and managing cloud-based services", "👨‍💼 Leading and coordinating IT projects"], answer: null },
+            { question: "Do you like teamwork 🤝 or independent work 🏡?", options: ["I enjoy working in a team and collaborating", "I prefer working alone on my projects"], answer: null },
+            { question: "What is your preferred way to learn new skills? 📚", options: ["🎥 Watching tutorials and building projects", "📖 Reading books and documentation", "🎓 Taking structured courses and certifications", "🔬 Experimenting with new technology hands-on"], answer: null },
+            { question: "Would you prefer working on software (apps, programs, AI) 💻 or hardware (devices, networks, robotics) 🛠️?", options: ["Software", "Hardware"], answer: null },
+            { question: "Do you enjoy solving real-world problems using technology? 🌍", options: ["Yes, I love practical problem-solving", "No, I prefer creative or analytical work"], answer: null },
+            { question: "What would you prefer to do in the future? 🚀", options: ["🏢 Build a startup or work in a tech company", "🔬 Research and develop new technology", "👨‍💼 Manage IT teams and projects", "💼 Freelance and work on my own projects"], answer: null }
+
+        ];
+        
+        let currentQuestion = 0;
+        let answers = [];
+        
+        function loadQuestion() {
+            const questionContainer = document.getElementById("question-container");
+            questionContainer.innerHTML = '';
+            
+            let q = questions[currentQuestion];
+            let questionElement = document.createElement("div");
+            questionElement.classList.add("question");
+            questionElement.innerText = q.question;
+            
+            let optionsContainer = document.createElement("div");
+            optionsContainer.classList.add("options");
+            
+            q.options.forEach(option => {
+                let label = document.createElement("label");
+                let input = document.createElement("input");
+                input.type = "radio";
+                input.name = "quiz";
+                input.value = option;
+                label.appendChild(input);
+                label.appendChild(document.createTextNode(" " + option));
+                optionsContainer.appendChild(label);
+            });
+            
+            questionContainer.appendChild(questionElement);
+            questionContainer.appendChild(optionsContainer);
+        }
+        
+        function nextQuestion() {
+            let selectedOption = document.querySelector("input[name='quiz']:checked");
+            if (selectedOption) {
+                answers.push(selectedOption.value);
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    loadQuestion();
+                } else {
+                    document.getElementById("question-container").innerHTML = "🎉 Quiz completed!";
+                    document.querySelector(".next-btn").style.display = "none";
+                    document.getElementById("result").innerText = analyzeResults();
+                }
+            } else {
+                alert("⚠️ Please select an answer before proceeding.");
+            }
+        }
+        
+        function analyzeResults() {
+            const analysisMap = {
+                "💻 Building websites and web applications": "Web Development 🌐",
+                "📱 Creating mobile apps": "Mobile App Development 📱",
+                "🔒 Designing secure systems to prevent cyber threats": "Cybersecurity 🔒",
+                "📊 Analyzing large amounts of data for insights": "Data Science & Analytics 📊",
+                "🤖 Automating tasks using AI": "Artificial Intelligence & Machine Learning 🤖",
+                "🖧 Managing networks and servers": "Networking & System Administration 🖧",
+                "🎮 Developing software and games": "Game Development 🎮",
+                "⚙️ Working with hardware and embedded systems": "Embedded Systems & IoT 🔌",
+                "☁️ Cloud computing and managing online infrastructure": "Cloud Computing & DevOps ☁️",
+                "👨‍💼 Leading tech projects and managing teams": "IT Project Management 👔"
+            };
+            
+            let result = "Based on your answers, your ideal IT domain is: ";
+            let selectedFields = answers.map(answer => analysisMap[answer]).filter(Boolean);
+            let uniqueFields = [...new Set(selectedFields)];
+            
+            return result + (uniqueFields.length ? uniqueFields.join(", ") : "[Analysis Pending]");
+        }
+        
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>

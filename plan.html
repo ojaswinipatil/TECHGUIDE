@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Layout</title>
+    <style>
+        body {
+            background-color: #ffffff; /* Off-white */
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .header {
+            background-color: #ffde32; /* Pale Yellow */
+            padding: 40px;
+            text-align: center;
+        }
+        .header img {
+            width: 1000px;
+            height: 60px;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .left-images {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .left-images img {
+            width: 700px;
+            height: 40;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .left-images img:hover {
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+        .right-image {
+            position :relative;
+            alignment:right;
+            padding-top: 40px;
+        }
+        .right-image img {
+            width: 300px;
+            height: 400px;
+        }
+    </style>
+    <script>
+        function navigateToPage(imageNumber) {
+            window.location.href = 'page' + imageNumber + '.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <img src="C:\Users\hp\Downloads\Your paragraph text (13).png" alt="Header Image">
+    </div>
+    <div class="container">
+        <div class="left-images">
+            <img src="C:\Users\hp\Downloads\💻 Software Development (Web, Mobile, Backend) (3).png" alt="Image 1" onclick="navigateToPage(1)">
+            <img src="C:\Users\hp\Downloads\UIUX Design (User Interface, Graphic Design) (3).png" alt="Image 2" onclick="navigateToPage(2)">
+            <img src="C:\Users\hp\Downloads\Internet of Things (IoT) (Smart Device, Embedded System) (2).png" alt="Image 3" onclick="navigateToPage(3)">
+            <img src="C:\Users\hp\Downloads\🔒 Cybersecurity (Ethical Hacking, Security Analyst) (1).png" alt="Image 4" onclick="navigateToPage(4)">
+            <img src="C:\Users\hp\Downloads\Game Development (Game Design, Graphics Programming) 🎮 (3).png" alt="Image 5" onclick="navigateToPage(5)">
+            <img src="C:\Users\hp\Downloads\IT Support (Technical Support, System Troubleshooting) (1).png" alt="Image 6" onclick="navigateToPage(6)">
+            <img src="C:\Users\hp\Downloads\Networking & IT Infrastructure ( Network Engineer) (2).png" alt="Image 7" onclick="navigateToPage(7)">
+            <img src="C:\Users\hp\Downloads\Cloud Computing & DevOps (AWS, Kubernetes, Docker) (4).png" alt="Image 8" onclick="navigateToPage(8)">
+            <img src="C:\Users\hp\Downloads\🤖 (1).png" alt="Image 9" onclick="navigateToPage(9)">
+            <img src="C:\Users\hp\Downloads\Internet of Things (IoT) (Smart Devices, Embedded Systems) (2).png" alt="Image 10" onclick="navigateToPage(10)">
+        </div>
+        <div class="right-image">
+            <img src="C:\Users\hp\OneDrive\Pictures\Camera Roll\download (6).jpg" alt="Image 11">
+        </div>
+    </div>
+</body>
+</html>
+

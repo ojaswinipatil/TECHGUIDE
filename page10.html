@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Layout</title>
+    <style>
+        body {
+            background-color: #ffffff; /* Off-white */
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .header {
+            background-color: #ffdd32; /* Pale Yellow */
+            padding: 40px;
+            text-align: center;
+        }
+        .header img {
+            width: 1000px;
+            height: 60px;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .left-images {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .left-images img {
+            width: 600px;
+            height: 50;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+         .right-image {
+            position :relative;
+            alignment:right;
+            padding-top: 40px;
+        }
+        .right-image img {
+            width: 300px;
+            height:400px;
+        }
+    </style>
+    </head>
+<body>
+    <div class="header">
+        <img src="C:\Users\hp\Downloads\Your paragraph text (13).png" alt="Header Image">
+    </div>
+    <div class="container">
+        <div class="left-images">
+            <img src="C:\Users\hp\Downloads\Learn Networking Basics (TCPIP, OSI Model) (8).png" alt="Image 1" onclick="navigateToPage(1)">
+            <img src="C:\Users\hp\Downloads\Learn Linux and Shell Scripting (9).png" alt="Image 2" onclick="navigateToPage(2)">
+            <img src="C:\Users\hp\Downloads\Choose a specialization (Web Dev, Mobile, AI, Backend) (9).png" alt="Image 3" onclick="navigateToPage(3)">
+            <img src="C:\Users\hp\Downloads\Master Cryptography & Security Concepts (11).png" alt="Image 4" onclick="navigateToPage(4)">
+            <img src="C:\Users\hp\Downloads\Work on Bug Bounty & Capture The Flag (CTF) challenges (7).png" alt="Image 5" onclick="navigateToPage(5)">
+           
+           </div>
+        <div class="right-image">
+            <img src="C:\Users\hp\OneDrive\Pictures\Camera Roll\download (7).jpg" alt="Image 11">
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industry Projects in IT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #fff8e1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-left: 15px solid #ffc107;
+            border-top: 10px solid #ffc107;
+        }
+        h1, h2, h3 {
+            color: #333;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #ffecb3;
+            border-left: 7px solid #ffc107;
+            border-bottom: 5px solid #ffc107;
+        }
+        .hidden {
+            display: none;
+        }
+        button {
+            background-color: #ffc107;
+            color: black;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            background-color: #ffb300;
+            transform: scale(1.05);
+            box-shadow: 0 0 10px #ffeb3b;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li::before {
+            content: "\2714";
+            color: green;
+            margin-right: 8px;
+        }
+    </style>
+    <script>
+        function toggleSection(id) {
+            var section = document.getElementById(id);
+            if (section.style.display === "none" || section.style.display === "") {
+                section.style.display = "block";
+            } else {
+                section.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Industry Projects in IT: Real-World Applications</h1>
+        
+        <div class="section">
+            <button onclick="toggleSection('project-intro')">What are Industry Projects?</button>
+            <div id="project-intro" class="hidden">
+                <ul>
+                    <li>Real-world problems solved using technology</li>
+                    <li>Collaboration between companies and developers</li>
+                    <li>Enhance technical and soft skills</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <button onclick="toggleSection('ai-ml')">Artificial Intelligence & Machine Learning</button>
+            <div id="ai-ml" class="hidden">
+                <ul>
+                    <li>AI-Powered Chatbot - Provides automated responses and customer support.</li>
+                    <li>Fraud Detection System - Uses AI to identify fraudulent transactions.</li>
+                    <li>Automated Resume Screening - AI filters candidates based on job requirements.</li>
+                    <li>Healthcare Diagnosis AI - AI assists doctors in diagnosing diseases.</li>
+                    <li>Stock Market Prediction - Predicts stock trends using AI models.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <button onclick="toggleSection('cybersecurity')">Cybersecurity</button>
+            <div id="cybersecurity" class="hidden">
+                <ul>
+                    <li>Intrusion Detection System - Detects unauthorized network access.</li>
+                    <li>Secure Authentication System - Multi-factor authentication implementation.</li>
+                    <li>Phishing Attack Prevention - Identifies and blocks phishing emails.</li>
+                    <li>Malware Analysis Tool - Detects and neutralizes malware threats.</li>
+                    <li>Encrypted File Storage - Ensures secure data storage using encryption.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <button onclick="toggleSection('cloud-computing')">Cloud Computing</button>
+            <div id="cloud-computing" class="hidden">
+                <ul>
+                    <li>Cloud-Based Data Backup - Secure cloud storage and backup solution.</li>
+                    <li>Serverless Application - Deploy apps without managing infrastructure.</li>
+                    <li>Cloud-Based Video Streaming - Efficient video hosting and delivery.</li>
+                    <li>Scalable E-Commerce Platform - Cloud-hosted e-commerce system.</li>
+                    <li>Remote DevOps Pipeline - Cloud automation for software deployment.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <button onclick="toggleSection('blockchain')">Blockchain</button>
+            <div id="blockchain" class="hidden">
+                <ul>
+                    <li>Smart Contract System - Automates contract execution using blockchain.</li>
+                    <li>Cryptocurrency Wallet - Secure storage and transactions for digital currency.</li>
+                    <li>Supply Chain Management - Blockchain for transparent tracking of goods.</li>
+                    <li>Decentralized Voting System - Secure and tamper-proof online voting.</li>
+                    <li>NFT Marketplace - Platform for buying and selling digital assets.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <button onclick="toggleSection('iot')">IoT & Embedded Systems</button>
+            <div id="iot" class="hidden">
+                <ul>
+                    <li>Smart Home Automation - Remote control of home appliances.</li>
+                    <li>IoT-Based Weather Monitoring - Real-time weather data collection.</li>
+                    <li>Wearable Health Monitor - Tracks vital signs and health metrics.</li>
+                    <li>Smart Traffic Management - IoT sensors for real-time traffic control.</li>
+                    <li>Industrial IoT Monitoring - Sensor-based monitoring of industrial equipment.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <button onclick="toggleSection('benefits-projects')">Benefits of Industry Projects</button>
+            <div id="benefits-projects" class="hidden">
+                <ul>
+                    <li>Gain hands-on experience with real-world applications</li>
+                    <li>Improve teamwork and problem-solving skills</li>
+                    <li>Increase job opportunities and career growth</li>
+                    <li>Build a strong portfolio for tech careers</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

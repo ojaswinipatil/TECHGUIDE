@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Section</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: linear-gradient(135deg, #fff9ce, #b7b404);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            color: white;
+        }
+        h2 {
+            color: #fff;
+        }
+        .search-box {
+            margin-bottom: 10px;
+        }
+        .search-box input {
+            padding: 12px;
+            width: 80%;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            outline: none;
+            text-align: center;
+        }
+        .yellow-button {
+            background-color: #ff5722;
+            color: rgb(255, 255, 255);
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        .yellow-button:hover {
+            background-color: #ff5722;
+        }
+        .job-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        .job-item {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            position: relative;
+            transition: transform 0.3s ease-in-out;
+        }
+        .job-item:hover {
+            transform: scale(1.05);
+        }
+        .job-item h3 {
+            margin: 0;
+            color: #007BFF;
+        }
+        .job-item p {
+            margin: 5px 0;
+            color: #444;
+        }
+        .apply-btn {
+            background: #ff5722;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .apply-btn:hover {
+            background: #e64a19;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        .popup button {
+            margin-top: 10px;
+            padding: 8px 15px;
+            border: none;
+            background: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .popup button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Job Opportunities</h2>
+        <div class="search-box">
+            <input type="text" id="search" placeholder="Search by qualification..." onkeyup="filterJobs()">
+        </div>
+                <ul class="job-list" id="jobList"></ul>
+    </div>
+    
+    <div class="popup" id="popup">
+        <p id="popupMessage"></p>
+        <button onclick="closePopup()">OK</button>
+    </div>
+    
+    <script>
+        const jobs = [
+            { title: "Software Engineer", qualification: "B.Tech", experience: "2+ years", location: "Bangalore", salary: "₹8-12 LPA", skills: "Java, Python, SQL" },
+            { title: "Web Developer", qualification: "MCA", experience: "1+ years", location: "Remote", salary: "₹6-10 LPA", skills: "HTML, CSS, JavaScript, React" },
+            { title: "Data Analyst", qualification: "B.Sc", experience: "Fresher", location: "Mumbai", salary: "₹5-8 LPA", skills: "SQL, Excel, Power BI, Python" },
+            { title: "Machine Learning Engineer", qualification: "B.Tech", experience: "3+ years", location: "Hyderabad", salary: "₹12-18 LPA", skills: "Python, TensorFlow, Scikit-learn" },
+            { title: "Cybersecurity Analyst", qualification: "B.Tech", experience: "2+ years", location: "Pune", salary: "₹10-15 LPA", skills: "Network Security, Penetration Testing, SIEM" },
+            { title: "Full Stack Developer", qualification: "MCA", experience: "3+ years", location: "Chennai", salary: "₹10-15 LPA", skills: "React, Node.js, Express, MongoDB" },
+            { title: "Cloud Engineer", qualification: "M.Tech", experience: "4+ years", location: "Delhi", salary: "₹15-20 LPA", skills: "AWS, Azure, Google Cloud" }
+        ];
+        
+        function displayJobs(filteredJobs) {
+            const jobList = document.getElementById("jobList");
+            jobList.innerHTML = "";
+            filteredJobs.forEach(job => {
+                jobList.innerHTML += `
+                    <li class="job-item">
+                        <h3>${job.title}</h3>
+                        <p>Qualification: ${job.qualification}</p>
+                        <p>Experience: ${job.experience}</p>
+                        <p>Location: ${job.location}</p>
+                        <p>Salary: ${job.salary}</p>
+                        <p>Skills: ${job.skills}</p>
+                        <button class="apply-btn" onclick="applyJob('${job.title}')">Apply</button>
+                    </li>`;
+            });
+        }
+        
+        function filterJobs() {
+            const searchValue = document.getElementById("search").value.toLowerCase();
+            const filteredJobs = jobs.filter(job => job.qualification.toLowerCase().includes(searchValue));
+            displayJobs(filteredJobs);
+        }
+        
+        function applyJob(jobTitle) {
+            document.getElementById('popupMessage').innerText = `Applied for ${jobTitle}`;
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        function redirectToOpportunities() {
+            window.location.href = "opportunities.html";
+        }
+        
+        displayJobs(jobs);
+    </script>
+</body>
+</html>
