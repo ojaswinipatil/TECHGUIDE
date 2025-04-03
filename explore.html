@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Career Path Finder Quiz</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --danger-color: #e74c3c;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            background-color: #3498db;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .intro {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .start-btn {
+            display: block;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 30px auto 0;
+            transition: background-color 0.3s;
+        }
+        
+        .start-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        #quiz-container {
+            display: none;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .question {
+            margin-bottom: 25px;
+        }
+        
+        .question h3 {
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 12px 15px;
+            background-color: var(--light-color);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .option:hover {
+            background-color: #d1d8e0;
+        }
+        
+        .option.selected {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .nav-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        #submit-btn {
+            background-color: var(--secondary-color);
+        }
+        
+        #submit-btn:hover {
+            background-color: #27ae60;
+        }
+        
+        #result-container {
+            display: none;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .result-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .result-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: var(--light-color);
+        }
+        
+        .result-item h3 {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .result-item .score {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .top-domain {
+            background-color: rgba(46, 204, 113, 0.2);
+            border-left: 5px solid var(--secondary-color);
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 5px;
+        }
+        
+        .retake-btn {
+            display: block;
+            background-color: var(--dark-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 30px auto 0;
+            transition: background-color 0.3s;
+        }
+        
+        .retake-btn:hover {
+            background-color: #1a252f;
+        }
+        
+        .domain-description {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f0f7ff;
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .progress-indicator {
+            text-align: center;
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (min-width: 768px) {
+            .options {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>IT Career Path Finder Quiz</h1>
+        <p>Discover your ideal IT specialization based on your preferences and strengths</p>
+    </header>
+    
+    <section class="intro">
+        <h2>Why Take This Quiz?</h2>
+        <p>The world of Information Technology is vast with numerous exciting specializations. Finding your perfect fit can significantly impact your learning journey and future career satisfaction.</p>
+        
+        <h3>Benefits of Discovering Your IT Domain:</h3>
+        <ul>
+            <li><strong>Focused Learning:</strong> Concentrate your efforts on skills that align with your interests and natural aptitudes</li>
+            <li><strong>Career Clarity:</strong> Gain insights into which IT career paths might be most fulfilling for you</li>
+            <li><strong>Efficient Skill Development:</strong> Prioritize learning the technologies most relevant to your target domain</li>
+            <li><strong>Increased Motivation:</strong> Study with more enthusiasm when focusing on areas that genuinely excite you</li>
+            <li><strong>Better Project Choices:</strong> Select academic projects that build relevant portfolio pieces</li>
+        </ul>
+        
+        <p>This 15-question assessment evaluates your preferences across 10 major IT domains to help you discover where your strengths and interests align.</p>
+        
+        <button id="start-quiz" class="start-btn">Start Quiz</button>
+    </section>
+    
+    <div id="quiz-container">
+        <div class="progress-indicator">Question <span id="current-question">1</span> of 15</div>
+        
+        <div id="question-container"></div>
+        
+        <div class="navigation">
+            <button id="prev-btn" class="nav-btn hidden">Previous</button>
+            <button id="next-btn" class="nav-btn">Next</button>
+            <button id="submit-btn" class="nav-btn hidden">See Results</button>
+        </div>
+    </div>
+    
+    <div id="result-container">
+        <div class="result-header">
+            <h2>Your IT Domain Profile</h2>
+            <p>Based on your responses, here's how your interests align with different IT specializations</p>
+        </div>
+        
+        <div id="results-list"></div>
+        
+        <div id="domain-recommendation" class="domain-description"></div>
+        
+        <button id="retake-quiz" class="retake-btn">Retake Quiz</button>
+    </div>
+    
+    <script>
+        // Quiz questions
+        const questions = [
+            {
+                question: "When faced with a technical problem, you prefer to:",
+                options: [
+                    { text: "Break it down systematically and write code to solve it", domains: ["Software Development"] },
+                    { text: "Analyze potential security vulnerabilities and risks", domains: ["Cybersecurity"] },
+                    { text: "Look for patterns in data to understand the root cause", domains: ["Data Science & AI"] },
+                    { text: "Consider how the user experience could be improved", domains: ["UI/UX Design"] }
+                ]
+            },
+            {
+                question: "Which project sounds most exciting to you?",
+                options: [
+                    { text: "Creating a smart home automation system", domains: ["Internet of Things (IoT)"] },
+                    { text: "Designing an immersive virtual world", domains: ["Game Development"] },
+                    { text: "Building a decentralized application using blockchain", domains: ["Blockchain & Web3"] },
+                    { text: "Setting up a secure cloud infrastructure", domains: ["Cloud Computing & DevOps"] }
+                ]
+            },
+            {
+                question: "What aspect of technology do you find yourself drawn to?",
+                options: [
+                    { text: "Solving performance issues and optimizing systems", domains: ["Networking & IT Infrastructure"] },
+                    { text: "Explaining technology concepts to others and troubleshooting their issues", domains: ["IT Support & Helpdesk"] },
+                    { text: "Creating intuitive and visually appealing interfaces", domains: ["UI/UX Design"] },
+                    { text: "Developing software applications to solve real-world problems", domains: ["Software Development"] }
+                ]
+            },
+            {
+                question: "When learning a new technology, you prefer to:",
+                options: [
+                    { text: "Experiment with code and build small projects", domains: ["Software Development"] },
+                    { text: "Set up infrastructure and automation pipelines", domains: ["Cloud Computing & DevOps"] },
+                    { text: "Understand mathematical models and algorithms behind it", domains: ["Data Science & AI"] },
+                    { text: "Test its security features and look for weaknesses", domains: ["Cybersecurity"] }
+                ]
+            },
+            {
+                question: "Which skills are you most excited to develop?",
+                options: [
+                    { text: "Hardware integration and sensor programming", domains: ["Internet of Things (IoT)"] },
+                    { text: "Network design and system administration", domains: ["Networking & IT Infrastructure"] },
+                    { text: "3D modeling and game engine development", domains: ["Game Development"] },
+                    { text: "Data analysis and machine learning model creation", domains: ["Data Science & AI"] }
+                ]
+            },
+            {
+                question: "In a group project, you naturally take on the role of:",
+                options: [
+                    { text: "The implementer who writes the core functionality", domains: ["Software Development"] },
+                    { text: "The designer who ensures the solution is user-friendly", domains: ["UI/UX Design"] },
+                    { text: "The troubleshooter who resolves technical issues", domains: ["IT Support & Helpdesk"] },
+                    { text: "The architect who plans the system structure", domains: ["Cloud Computing & DevOps", "Networking & IT Infrastructure"] }
+                ]
+            },
+            {
+                question: "Which outcome gives you the most satisfaction?",
+                options: [
+                    { text: "Creating a program that works exactly as intended", domains: ["Software Development"] },
+                    { text: "Securing a system against potential attacks", domains: ["Cybersecurity"] },
+                    { text: "Extracting useful insights from complex data", domains: ["Data Science & AI"] },
+                    { text: "Seeing users intuitively navigate through your interface", domains: ["UI/UX Design"] }
+                ]
+            },
+            {
+                question: "You have free time to explore new technology. You choose to:",
+                options: [
+                    { text: "Learn about distributed ledger technologies and smart contracts", domains: ["Blockchain & Web3"] },
+                    { text: "Set up a home lab with servers and network equipment", domains: ["Networking & IT Infrastructure"] },
+                    { text: "Create interactive game prototypes", domains: ["Game Development"] },
+                    { text: "Build an automated deployment pipeline for applications", domains: ["Cloud Computing & DevOps"] }
+                ]
+            },
+            {
+                question: "Which challenge would you find most engaging?",
+                options: [
+                    { text: "Designing a circuit board for a new IoT device", domains: ["Internet of Things (IoT)"] },
+                    { text: "Developing a new encryption algorithm", domains: ["Cybersecurity"] },
+                    { text: "Building a responsive cross-platform mobile app", domains: ["Software Development"] },
+                    { text: "Creating a decentralized autonomous organization (DAO)", domains: ["Blockchain & Web3"] }
+                ]
+            },
+            {
+                question: "What type of books or articles do you enjoy reading?",
+                options: [
+                    { text: "Programming tutorials and coding best practices", domains: ["Software Development"] },
+                    { text: "Advanced mathematics and algorithm analysis", domains: ["Data Science & AI"] },
+                    { text: "User psychology and design principles", domains: ["UI/UX Design"] },
+                    { text: "System architecture and infrastructure design", domains: ["Cloud Computing & DevOps", "Networking & IT Infrastructure"] }
+                ]
+            },
+            {
+                question: "In your ideal job, you would spend most time:",
+                options: [
+                    { text: "Helping others solve their technical problems", domains: ["IT Support & Helpdesk"] },
+                    { text: "Working with data to uncover patterns and insights", domains: ["Data Science & AI"] },
+                    { text: "Creating immersive digital experiences", domains: ["Game Development", "UI/UX Design"] },
+                    { text: "Building and maintaining secure networks", domains: ["Networking & IT Infrastructure", "Cybersecurity"] }
+                ]
+            },
+            {
+                question: "Which technology trend excites you the most?",
+                options: [
+                    { text: "Automated CI/CD pipelines and infrastructure as code", domains: ["Cloud Computing & DevOps"] },
+                    { text: "The expansion of interconnected smart devices", domains: ["Internet of Things (IoT)"] },
+                    { text: "Decentralized finance and Web3 applications", domains: ["Blockchain & Web3"] },
+                    { text: "Advances in computer graphics and physics engines", domains: ["Game Development"] }
+                ]
+            },
+            {
+                question: "What part of developing a new application interests you most?",
+                options: [
+                    { text: "Designing the user interface and flows", domains: ["UI/UX Design"] },
+                    { text: "Writing the core functionality and logic", domains: ["Software Development"] },
+                    { text: "Setting up the deployment environment", domains: ["Cloud Computing & DevOps"] },
+                    { text: "Ensuring the application is secure from threats", domains: ["Cybersecurity"] }
+                ]
+            },
+            {
+                question: "When solving technical problems, your approach is to:",
+                options: [
+                    { text: "Methodically isolate variables until you find the issue", domains: ["IT Support & Helpdesk"] },
+                    { text: "Visualize data and look for correlations", domains: ["Data Science & AI"] },
+                    { text: "Check for potential security breaches or vulnerabilities", domains: ["Cybersecurity"] },
+                    { text: "Review system logs and network traffic", domains: ["Networking & IT Infrastructure"] }
+                ]
+            },
+            {
+                question: "Which emerging field would you most like to specialize in?",
+                options: [
+                    { text: "Extended Reality (AR/VR) development", domains: ["Game Development", "Software Development"] },
+                    { text: "Edge computing and distributed systems", domains: ["Internet of Things (IoT)", "Cloud Computing & DevOps"] },
+                    { text: "Zero-trust security architecture", domains: ["Cybersecurity", "Networking & IT Infrastructure"] },
+                    { text: "Generative AI and large language models", domains: ["Data Science & AI"] }
+                ]
+            }
+        ];
+        
+        // Domain descriptions
+        const domainDescriptions = {
+            "Software Development": "Software Development encompasses creating, designing, and building applications across various platforms including web, mobile, and backend systems. As a software developer, you'll write code to implement features, solve problems, and create digital products that users interact with. This domain requires strong logical thinking, programming skills, and the ability to translate business requirements into technical solutions.",
+            
+            "Cybersecurity": "Cybersecurity focuses on protecting systems, networks, and data from digital attacks. This field includes ethical hacking (finding vulnerabilities before malicious actors do) and security analysis (monitoring and responding to threats). Cybersecurity professionals need strong analytical thinking, knowledge of various attack vectors, and understanding of security frameworks.",
+            
+            "Data Science & AI": "Data Science & AI involve extracting insights from data and creating systems that can learn from data patterns. This includes machine learning, data mining, and working with large datasets. This domain requires strong analytical skills, statistical knowledge, and the ability to interpret complex data to drive decisions.",
+            
+            "Cloud Computing & DevOps": "Cloud Computing & DevOps focus on deploying, managing, and scaling applications in cloud environments while implementing practices that combine software development and IT operations. Professionals in this domain work with technologies like AWS, Kubernetes, and Docker to create efficient and reliable infrastructure pipelines.",
+            
+            "UI/UX Design": "UI/UX Design concentrates on creating intuitive, accessible, and aesthetically pleasing user interfaces. This domain combines artistic creativity with user psychology to design digital experiences that are both functional and enjoyable. UI/UX designers need to understand user behavior, visual design principles, and how to translate user needs into interface elements.",
+            
+            "Internet of Things (IoT)": "Internet of Things (IoT) involves connecting physical devices to the internet and enabling them to collect and exchange data. This domain bridges hardware and software to create smart systems and requires knowledge of embedded systems, networking protocols, and sensor integration.",
+            
+            "Networking & IT Infrastructure": "Networking & IT Infrastructure focuses on designing, implementing, and maintaining the foundational technology components that support digital operations. This includes network architecture, system administration, and ensuring reliable connectivity. Professionals in this domain need strong troubleshooting skills and knowledge of hardware and networking protocols.",
+            
+            "IT Support & Helpdesk": "IT Support & Helpdesk revolves around providing technical assistance to users, diagnosing and resolving computer problems, and ensuring systems run smoothly. This customer-facing role requires excellent communication skills, problem-solving abilities, and broad technical knowledge to handle diverse issues.",
+            
+            "Game Development": "Game Development combines programming, design, and storytelling to create interactive entertainment experiences. This domain includes game design, graphics programming, and creating immersive virtual worlds. Game developers need creative thinking, programming skills, and often knowledge of physics, 3D modeling, and animation.",
+            
+            "Blockchain & Web3": "Blockchain & Web3 involve creating decentralized applications and working with distributed ledger technologies. This emerging field focuses on building trust, transparency, and security into digital transactions and systems. Blockchain developers need to understand cryptography, consensus mechanisms, and smart contract programming."
+        };
+        
+        // Quiz state
+        let currentQuestionIndex = 0;
+        let answers = [];
+        let results = {};
+        
+        // DOM elements
+        const startBtn = document.getElementById('start-quiz');
+        const quizContainer = document.getElementById('quiz-container');
+        const questionContainer = document.getElementById('question-container');
+        const currentQuestionIndicator = document.getElementById('current-question');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const resultContainer = document.getElementById('result-container');
+        const resultsList = document.getElementById('results-list');
+        const domainRecommendation = document.getElementById('domain-recommendation');
+        const retakeBtn = document.getElementById('retake-quiz');
+        
+        // Initialize the quiz
+        startBtn.addEventListener('click', () => {
+            document.querySelector('.intro').style.display = 'none';
+            quizContainer.style.display = 'block';
+            loadQuestion(0);
+        });
+        
+        // Navigation buttons
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                loadQuestion(currentQuestionIndex - 1);
+            }
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            if (currentQuestionIndex < questions.length - 1) {
+                loadQuestion(currentQuestionIndex + 1);
+            }
+        });
+        
+        submitBtn.addEventListener('click', () => {
+            calculateResults();
+            displayResults();
+            quizContainer.style.display = 'none';
+            resultContainer.style.display = 'block';
+        });
+        
+        retakeBtn.addEventListener('click', () => {
+            resetQuiz();
+            resultContainer.style.display = 'none';
+            quizContainer.style.display = 'block';
+        });
+        
+        // Load a question
+        function loadQuestion(index) {
+            currentQuestionIndex = index;
+            currentQuestionIndicator.textContent = index + 1;
+            
+            // Update navigation buttons
+            prevBtn.classList.toggle('hidden', index === 0);
+            nextBtn.classList.toggle('hidden', index === questions.length - 1);
+            submitBtn.classList.toggle('hidden', index !== questions.length - 1);
+            
+            const question = questions[index];
+            
+            // Create question HTML
+            let questionHTML = `
+                <div class="question">
+                    <h3>${question.question}</h3>
+                    <div class="options">
+            `;
+            
+            // Add options
+            question.options.forEach((option, i) => {
+                const isSelected = answers[index] === i;
+                questionHTML += `
+                    <div class="option ${isSelected ? 'selected' : ''}" data-index="${i}">
+                        ${option.text}
+                    </div>
+                `;
+            });
+            
+            questionHTML += `
+                    </div>
+                </div>
+            `;
+            
+            questionContainer.innerHTML = questionHTML;
+            
+            // Add event listeners to options
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    document.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    
+                    // Save answer
+                    const optionIndex = parseInt(option.getAttribute('data-index'));
+                    answers[currentQuestionIndex] = optionIndex;
+                    
+                    // Auto-advance to next question after a short delay
+                    if (currentQuestionIndex < questions.length - 1) {
+                        setTimeout(() => {
+                            loadQuestion(currentQuestionIndex + 1);
+                        }, 500);
+                    }
+                });
+            });
+        }
+        
+        // Calculate results
+        function calculateResults() {
+            // Initialize domains
+            const domains = [
+                "Software Development",
+                "Cybersecurity",
+                "Data Science & AI",
+                "Cloud Computing & DevOps",
+                "UI/UX Design",
+                "Internet of Things (IoT)",
+                "Networking & IT Infrastructure",
+                "IT Support & Helpdesk",
+                "Game Development",
+                "Blockchain & Web3"
+            ];
+            
+            domains.forEach(domain => {
+                results[domain] = 0;
+            });
+            
+            // Calculate scores
+            for(let i = 0; i < answers.length; i++) {
+                const answer = answers[i];
+                if(answer !== undefined) {
+                    const selectedOption = questions[i].options[answer];
+                    selectedOption.domains.forEach(domain => {
+                        results[domain] += 1;
+                    });
+                }
+            }
+        }
+        
+        // Display results
+        function displayResults() {
+            // Sort domains by score
+            const sortedDomains = Object.keys(results).sort((a, b) => results[b] - results[a]);
+            const maxScore = Math.max(...Object.values(results));
+            
+            // Clear previous results
+            resultsList.innerHTML = '';
+            
+            // Add domain results
+            sortedDomains.forEach(domain => {
+                const score = results[domain];
+                const percentage = (score / 15) * 100;
+                
+                const resultHTML = `
+                    <div class="result-item ${domain === sortedDomains[0] ? 'top-domain' : ''}">
+                        <h3>
+                            ${domain}
+                            <span class="score">${percentage.toFixed(0)}%</span>
+                        </h3>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: ${percentage}%"></div>
+                        </div>
+                    </div>
+                `;
+                
+                resultsList.innerHTML += resultHTML;
+            });
+            
+            // Show recommendation for top domain
+            const topDomain = sortedDomains[0];
+            domainRecommendation.innerHTML = `
+                <h3>Your Recommended Path: ${topDomain}</h3>
+                <p>${domainDescriptions[topDomain]}</p>
+                <p>Based on your responses, you show a strong affinity for ${topDomain}. Consider exploring courses, projects, and opportunities in this area to leverage your natural interests and strengths.</p>
+            `;
+        }
+        
+        // Reset quiz
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            answers = [];
+            results = {};
+            loadQuestion(0);
+        }
+        
+        // Initialize
+        function init() {
+            // Pre-fill answers array
+            answers = new Array(questions.length);
+        }
+        
+        init();
+    </script>
+</body>
+</html>

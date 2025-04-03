@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TECHGUIDE - Your IT Career Compass</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .header {
+            background-image: url('https://as2.ftcdn.net/v2/jpg/10/84/84/31/1000_F_1084843196_cY39BPNDlrbBwVZPP4yXdxndhP5F6RnU.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        .header-content {
+            position: relative;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo-icon {
+            background-color: #4285F4;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .welcome {
+            margin-bottom: 40px;
+        }
+        
+        .welcome h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .welcome p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        
+        .card-icon {
+            font-size: 24px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-icon.explore {
+            color: #FF5252;
+        }
+        
+        .card-icon.path {
+            color: #4285F4;
+        }
+        
+        .card-icon.practice {
+            color: #4CAF50;
+        }
+        
+        .card-icon.connect {
+            color: #9C27B0;
+        }
+        
+        .card-icon.jobs {
+            color: #FF9800;
+        }
+        
+        .card-icon.queries {
+            color: #E91E63;
+        }
+        
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .card p {
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            background-color: #1a2430;
+            color: white;
+            padding: 20px 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-copyright {
+            font-size: 14px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+            
+            .subtitle {
+                font-size: 18px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                        <rect x="9" y="9" width="6" height="6"></rect>
+                        <line x1="9" y1="2" x2="9" y2="4"></line>
+                        <line x1="15" y1="2" x2="15" y2="4"></line>
+                        <line x1="9" y1="20" x2="9" y2="22"></line>
+                        <line x1="15" y1="20" x2="15" y2="22"></line>
+                        <line x1="20" y1="9" x2="22" y2="9"></line>
+                        <line x1="20" y1="15" x2="22" y2="15"></line>
+                        <line x1="2" y1="9" x2="4" y2="9"></line>
+                        <line x1="2" y1="15" x2="4" y2="15"></line>
+                    </svg>
+                </div>
+                <div class="logo-text">TECHGUIDE</div>
+            </div>
+            <h1>YOUR IT CAREER COMPASS</h1>
+            <div class="subtitle">Guiding IT students to discover their passion, build skills, and connect with industry</div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section class="welcome">
+            <h2>Welcome to TECHGUIDE</h2>
+            <p>Your ultimate companion in the IT education journey. TECHGUIDE helps students discover their technical interests, develop in-demand skills, and connect with professionals in the industry. Navigate your path from classroom to career with personalized guidance and resources.</p>
+        </section>
+        
+        <section class="cards-container">
+            <!-- For each card, the href attribute needs to be updated by the developer -->
+            <a href="explore.html" class="card" id="explore-card">
+                <div class="card-icon explore">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <circle cx="12" cy="12" r="6"></circle>
+                        <circle cx="12" cy="12" r="2"></circle>
+                    </svg>
+                </div>
+                <h3>Explore</h3>
+                <p>Discover different IT domains and find which technology field aligns with your interests and strengths.</p>
+            </a>
+            
+            <a href="roadmap.html" class="card" id="path-card">
+                <div class="card-icon path">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                        <line x1="4" y1="22" x2="4" y2="15"></line>
+                    </svg>
+                </div>
+                <h3>Roadmap</h3>
+                <p>Follow a personalized learning roadmap tailored to your chosen IT specialty and current skill level.</p>
+            </a>
+            
+            <a href="practice.html" class="card" id="practice-card">
+                <div class="card-icon practice">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                </div>
+                <h3>Practice</h3>
+                <p>Gain hands-on experience with real-world projects designed to build your portfolio and technical skills.</p>
+            </a>
+            
+            <a href="connect.html" class="card" id="connect-card">
+                <div class="card-icon connect">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <h3>Connect</h3>
+                <p>Network with peers, professors, and industry professionals to build valuable relationships.</p>
+            </a>
+            
+            <a href="jobs.html" class="card" id="jobs-card">
+                <div class="card-icon jobs">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
+                </div>
+                <h3>Jobs</h3>
+                <p>Explore in-demand roles and discover what skills employers are seeking in your chosen field.</p>
+            </a>
+            
+            <a href="queries.html" class="card" id="queries-card">
+                <div class="card-icon queries">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                </div>
+                <h3>Queries</h3>
+                <p>Get answers to your questions about IT career paths, technologies, and industry trends.</p>
+            </a>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                        <rect x="9" y="9" width="6" height="6"></rect>
+                        <line x1="9" y1="2" x2="9" y2="4"></line>
+                        <line x1="15" y1="2" x2="15" y2="4"></line>
+                        <line x1="9" y1="20" x2="9" y2="22"></line>
+                        <line x1="15" y1="20" x2="15" y2="22"></line>
+                        <line x1="20" y1="9" x2="22" y2="9"></line>
+                        <line x1="20" y1="15" x2="22" y2="15"></line>
+                        <line x1="2" y1="9" x2="4" y2="9"></line>
+                        <line x1="2" y1="15" x2="4" y2="15"></line>
+                    </svg>
+                </div>
+                <div class="logo-text">TECHGUIDE</div>
+            </div>
+            <div class="footer-copyright">© 2025 TECHGUIDE. Supporting IT students on their journey to success.</div>
+        </div>
+    </footer>
+    
+    <script>
+        // Configuration object that developers can easily update with their page URLs
+        const pageUrls = {
+            explore:"explore.html",
+            path:"roadmap.html",
+            practice:"practice.html",
+            connect:"connect.html",
+            jobs:"jobs.html",
+            queries:"queries.html"
+        };
+
+        // For development purposes - display an alert when links are clicked
+        // This can be removed in production
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                const cardType = this.id.split('-')[0];
+                if (pageUrls[cardType] === `{{${cardType.toUpperCase()}_PAGE_URL}}`) {
+                    e.preventDefault();
+                    alert(`This would navigate to the ${this.querySelector('h3').textContent} page. Update the URL in the pageUrls object.`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

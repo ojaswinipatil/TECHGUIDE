@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Web Bot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2563eb;
+            margin-bottom: 20px;
+        }
+
+        .chat-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background-color: #2563eb;
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .chat-header h2 {
+            margin-left: 10px;
+        }
+
+        .chat-box {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 15px;
+            border-radius: 18px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: #2563eb;
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background-color: #f1f5f9;
+            color: #333;
+            border-bottom-left-radius: 5px;
+        }
+
+        .bot-message pre {
+            background-color: #1e293b;
+            color: #f8f8f2;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            background-color: white;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 25px;
+            background-color: white;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .chat-input button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            margin-left: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .chat-input button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .chat-input button:disabled {
+            background-color: #bfdbfe;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .loading-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #93c5fd;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .loading-dot:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .message {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gemini Web Bot</h1>
+        <div class="chat-container">
+            <div class="chat-header">
+                <h2>Gemini AI Assistant</h2>
+            </div>
+            <div id="chatBox" class="chat-box">
+                <div class="message bot-message">
+                    Hello! I'm your Gemini-powered assistant. How can I help you today?
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Type your message here..." autocomplete="off">
+                <button id="sendButton">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="white"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const chatBox = document.getElementById('chatBox');
+        const userInput = document.getElementById('userInput');
+        const sendButton = document.getElementById('sendButton');
+
+        // Pre-fitted API key 
+        const apiKey = "AIzaSyDMzA_42Kg5XXor20pJ_3_UCzQA6kTQfUA";  // 
+
+        // Chat functionality
+        let conversationHistory = [];
+
+        // Add message to chat
+        function addMessage(message, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+            
+            if (sender === 'bot') {
+                // Format code blocks with markdown-like syntax
+                const formattedMessage = message.replace(/```(\w*)([\s\S]*?)```/g, (match, language, code) => {
+                    return `<pre><code class="${language}">${code.trim()}</code></pre>`;
+                });
+                messageElement.innerHTML = formattedMessage;
+            } else {
+                messageElement.textContent = message;
+            }
+            
+            chatBox.appendChild(messageElement);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // Show loading indicator
+        function showLoading() {
+            const loadingElement = document.createElement('div');
+            loadingElement.classList.add('message', 'bot-message', 'loading');
+            loadingElement.id = 'loadingIndicator';
+            
+            for (let i = 0; i < 3; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('loading-dot');
+                loadingElement.appendChild(dot);
+            }
+            
+            chatBox.appendChild(loadingElement);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // Hide loading indicator
+        function hideLoading() {
+            const loadingElement = document.getElementById('loadingIndicator');
+            if (loadingElement) {
+                loadingElement.remove();
+            }
+        }
+
+        // Send message to Gemini API
+        async function sendToGemini(prompt) {
+            try {
+                // Update this URL to the correct Gemini API endpoint
+                const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+                
+                // Add the current message to conversation history
+                conversationHistory.push({ role: "user", parts: [{ text: prompt }] });
+                
+                const requestBody = {
+                    contents: conversationHistory,
+                    generationConfig: {
+                        temperature: 0.7,
+                        topK: 40,
+                        topP: 0.95,
+                        maxOutputTokens: 1024,
+                    }
+                };
+                
+                const response = await fetch(`${url}?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error.message || 'An error occurred with the Gemini API');
+                }
+                
+                if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+                    const botResponse = data.candidates[0].content.parts[0].text;
+                    
+                    // Add bot response to conversation history
+                    conversationHistory.push({ role: "model", parts: [{ text: botResponse }] });
+                    
+                    return botResponse;
+                } else {
+                    throw new Error('No response from Gemini');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                return `Error: ${error.message}`;
+            }
+        }
+
+        // Send message function
+        async function sendMessage() {
+            const message = userInput.value.trim();
+            if (!message) return;
+            
+            // Clear input
+            userInput.value = '';
+            
+            // Add user message to chat
+            addMessage(message, 'user');
+            
+            // Disable input while processing
+            userInput.disabled = true;
+            sendButton.disabled = true;
+            
+            // Show loading
+            showLoading();
+            
+            // Get response from Gemini
+            const response = await sendToGemini(message);
+            
+            // Hide loading
+            hideLoading();
+            
+            // Add bot response to chat
+            addMessage(response, 'bot');
+            
+            // Re-enable input
+            userInput.disabled = false;
+            sendButton.disabled = false;
+            userInput.focus();
+        }
+
+        // Event listeners
+        sendButton.addEventListener('click', sendMessage);
+        
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Make sure chat input is focused when page loads
+        window.addEventListener('load', () => {
+            userInput.focus();
+        });
+    </script>
+</body>
+</html>

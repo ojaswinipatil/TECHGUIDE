@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Connect Portal</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a237e, #283593);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            font-weight: 300;
+            margin-top: 0.5rem;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            flex: 1 1 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        
+        .card h2 {
+            color: #1a237e;
+            margin-top: 0;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 0.5rem;
+        }
+        
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #283593;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #283593;
+            color: white;
+            text-decoration: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #1a237e;
+        }
+        
+        form {
+            margin-top: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        footer {
+            background-color: #283593;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .success-stories {
+            background-color: #e8eaf6;
+            padding: 2rem 0;
+            margin: 2rem 0;
+        }
+        
+        /* Profile Styles */
+        .profile-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 2rem;
+        }
+        
+        .profile-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: calc(33.33% - 20px);
+            min-width: 250px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            flex-grow: 1;
+        }
+        
+        .profile-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .profile-header {
+            position: relative;
+            height: 120px;
+            background: linear-gradient(45deg, #1a237e, #3949ab);
+        }
+        
+        .profile-img {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 5px solid white;
+            background-color: #e0e0e0;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #757575;
+        }
+        
+        .profile-img img {
+            width: 100%;
+            height: auto;
+        }
+        
+        .profile-body {
+            padding: 60px 20px 20px 20px;
+            text-align: center;
+        }
+        
+        .profile-name {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .profile-title {
+            color: #757575;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .profile-skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .skill-tag {
+            background-color: #e8eaf6;
+            color: #3949ab;
+            font-size: 0.8rem;
+            padding: 5px 10px;
+            border-radius: 15px;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .tab {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: #757575;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            color: #1a237e;
+            border-bottom: 3px solid #1a237e;
+            margin-bottom: -2px;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4caf50;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .card-container {
+                flex-direction: column;
+            }
+            
+            .card {
+                margin-bottom: 1rem;
+            }
+            
+            .profile-card {
+                width: 100%;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tab {
+                flex: 1 1 auto;
+                text-align: center;
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>IT Connect Portal</h1>
+            <p class="subtitle">Connecting IT departments with mentors, professionals, and job providers</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Tabs Navigation -->
+        <div class="tabs">
+            <div class="tab active" onclick="openTab('mentors')">Mentors</div>
+            <div class="tab" onclick="openTab('professionals')">Professionals</div>
+            <div class="tab" onclick="openTab('employers')">Job Providers</div>
+            <div class="tab" onclick="openTab('contact')">Contact Us</div>
+        </div>
+        
+        <!-- Success Message -->
+        <div id="success-message" class="success-message">
+            Connected successfully! They will be notified of your interest.
+        </div>
+        
+        <!-- Mentors Tab -->
+        <div id="mentors" class="tab-content active">
+            <h2>Available Mentors</h2>
+            <p>Connect with experienced IT professionals ready to guide and mentor your team.</p>
+            
+            <div class="profile-container">
+                <!-- Mentor 1 -->
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-img">👨‍💻</div>
+                    </div>
+                    <div class="profile-body">
+                        <div class="profile-name">Dr. James Wilson</div>
+                        <div class="profile-title">Senior Software Architect · 15+ Years Experience</div>
+                        <div class="profile-skills">
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">Cloud Architecture</span>
+                            <span class="skill-tag">Systems Design</span>
+                        </div>
+                        <p>"I specialize in helping teams scale their applications and adopt modern development practices."</p>
+                        <button class="btn" onclick="showSuccess()">Connect</button>
+                    </div>
+                </div>
+                
+                <!-- Mentor 2 -->
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-img">👩‍💻</div>
+                    </div>
+                    <div class="profile-body">
+                        <div class="profile-name">Sarah Chen</div>
+                        <div class="profile-title">Data Science Lead · Ex-Google</div>
+                        <div class="profile-skills">
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Data Visualization</span>
+                        </div>
+                        <p>"Passionate about helping teams implement AI solutions and data-driven decision making."</p>
+                        <button class="btn" onclick="showSuccess()">Connect</button>
+                    </div>
+                </div>
+                
+                <!-- Mentor 3 -->
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-img">👨‍🏫</div>
+                    </div>
+                    <div class="profile-body">
+                        <div class="profile-name">Michael Rodriguez</div>
+                        <div class="profile-title">Cybersecurity Specialist · CISSP</div>
+                        <div class="profile-skills">
+                            <span class="skill-tag">Security Audits</span>
+                            <span class="skill-tag">Penetration Testing</span>
+                            <span class="skill-tag">Security Training</span>
+                        </div>
+                        <p>"I help organizations build robust security practices and cultivate security-minded teams."</p>
+                        <button class="btn" onclick="showSuccess()">Connect</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-container">
+                <!-- Mentor 4 -->
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-img">👩‍🔧</div>
+                    </div>
+                    <div class="profile-body">
+                        <div class="profile-name">Emily Patel</div>
+                        <div class="profile-title">DevOps Engineer · AWS Certified</div>
+                        <div class="profile-skills">
+                            <span class="skill-tag">CI/CD</span>
+                            <span class="skill-tag">Kubernetes</span>
+                            <span class="skill-tag">Infrastructure as Code</span>
+                        </div>
+                        <p>"Specializing in helping teams automate their deployment pipelines and embrace DevOps culture."</p>
+                        <button class="btn" onclick="showSuccess()">Connect</button>
+                    </div>
+                </div>
+                
+                <!-- Mentor 5 -->
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-img">👨‍🎨</div>
+                    </div>
+                    <div class="profile-body">
+                        <div class="profile-name">David Kim</div>
+                        <div class="profile-title">UX/UI Lead Designer</div>
+                        <div class="profile-skills">
+                            <span class="skill-tag">User Research</span>
+                            <span class="skill-tag">Design Systems</span>
+                            <span class="skill-tag">Accessibility</span>
+                        </div>
+                        <p>"I help technical teams understand and implement user-centered design principles."</p>
+                        <button class="btn" onclick="showSuccess()">Connect</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Professionals Tab -->
+        <div id="professionals" class="tab-content">
+            <h2>Professional Network</h2>
+            <p>Connect with IT professionals for collaboration, knowledge sharing, and community building.</p>
+            
+            <div class="profile-container">
+                <!-- Professional 1 -->
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-img">👨‍💼</div>
+                    </div>
+                    <div class="profile-body">
+                        <div class="profile-name">Thomas Wright</div>
+                        <div class="profile-title">Full Stack Developer · Freelancer</div>
+                        <div class="profile-skills">
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">MongoDB</span>
+                        </div>
+                        <p>"Looking to collaborate on innovative web projects and knowledge sharing."</p>
+                        <button class="btn" onclick="showSuccess()">Connect</button>
+                    </div>
+                </div>
+                
+                <!-- Professional 2 -->
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-img">👩‍🔬</div>
+                    </div>
+                    <div class="profile-body">
+                        <div class="profile-name">Lisa Johnson</div>
+                        <div class="profile-title">QA Automation Engineer</div>
+                        <div class="profile-skills">
+                            <span class="skill-tag">Selenium</span>
+                            <span class="skill-tag">Test Planning</span>
+                            <span class="skill-tag">CI Integration</span>
+                        </div>
+                        <p>"Passionate about quality assurance and building robust testing frameworks."</p>
+                        <button class="btn" onclick="showSuccess()">Connect</button>
+                    </div>
+                </div>
+                
+                <!-- Professional 3 -->
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-img">👨‍🚀</div>
+                    </div>
+                    <div class="profile-body">
+                        <div class="profile-name">Alex Morgan</div>
+                        <div class="profile-title">Product Manager · Agile Coach</div>
+                        <div class="profile-skills">
+                            <span class="skill-tag">Scrum</span>
+                            <span class="skill-tag">Product Roadmaps</span>
+                            <span class="skill-tag">User Stories</span>
+                        </div>
+                        <p>"Helping technical teams deliver value through effective product management."</p>
+                        <button class="btn" onclick="showSuccess()">Connect</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Employers Tab -->
+        <div id="employers" class="tab-content">
+            <h2>Job Providers</h2>
+            <p>Connect with companies looking for IT talent or post your own job openings.</p>
+            
+            <div class="profile-container">
+                <!-- Employer 1 -->
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-img">🏢</div>
+                    </div>
+                    <div class="profile-body">
+                        <div class="profile-name">TechNova Solutions</div>
+                        <div class="profile-title">Software Development Company</div>
+                        <div class="profile-skills">
+                            <span class="skill-tag">Currently Hiring</span>
+                            <span class="skill-tag">Remote Friendly</span>
+                        </div>
+                        <p>"Looking for senior developers with experience in cloud-native applications."</p>
+                        <button class="btn" onclick="showSuccess()">Connect</button>
+                    </div>
+                </div>
+                
+                <!-- Employer 2 -->
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-img">🏥</div>
+                    </div>
+                    <div class="profile-body">
+                        <div class="profile-name">HealthTech Innovations</div>
+                        <div class="profile-title">Healthcare Technology Provider</div>
+                        <div class="profile-skills">
+                            <span class="skill-tag">Currently Hiring</span>
+                            <span class="skill-tag">On-site</span>
+                        </div>
+                        <p>"Seeking data scientists and ML engineers for our healthcare analytics platform."</p>
+                        <button class="btn" onclick="showSuccess()">Connect</button>
+                    </div>
+                </div>
+                
+                <!-- Employer 3 -->
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-img">🏫</div>
+                    </div>
+                    <div class="profile-body">
+                        <div class="profile-name">Digital Learning Academy</div>
+                        <div class="profile-title">EdTech Startup</div>
+                        <div class="profile-skills">
+                            <span class="skill-tag">Currently Hiring</span>
+                            <span class="skill-tag">Hybrid</span>
+                        </div>
+                        <p>"Looking for UX designers and frontend developers passionate about education."</p>
+                        <button class="btn" onclick="showSuccess()">Connect</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Tab -->
+        <div id="contact" class="tab-content">
+            <div class="card">
+                <h2>Contact the IT Connect Team</h2>
+                <p>Have questions or need assistance with the portal? Our team is here to help.</p>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="contact-name">Name:</label>
+                        <input type="text" id="contact-name" placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email">Email:</label>
+                        <input type="email" id="contact-email" placeholder="Your Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-message">Message:</label>
+                        <textarea id="contact-message" placeholder="Your message..."></textarea>
+                    </div>
+                    <button type="button" class="btn" onclick="submitContact()">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 IT Connect Portal. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Tab functionality
+        function openTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let content of tabContents) {
+                content.classList.remove("active");
+            }
+            
+            // Remove active class from all tabs
+            const tabs = document.getElementsByClassName("tab");
+            for (let tab of tabs) {
+                tab.classList.remove("active");
+            }
+            
+            // Show the selected tab content
+            document.getElementById(tabName).classList.add("active");
+            
+            // Add active class to the clicked tab
+            const clickedTab = document.querySelector(`.tab[onclick="openTab('${tabName}')"]`);
+            clickedTab.classList.add("active");
+        }
+        
+        // Success message functionality
+        function showSuccess() {
+            const successMessage = document.getElementById("success-message");
+            successMessage.style.display = "block";
+            
+            // Hide the message after 3 seconds
+            setTimeout(function() {
+                successMessage.style.display = "none";
+            }, 3000);
+        }
+        
+        // Contact form submission
+        function submitContact() {
+            const name = document.getElementById("contact-name").value;
+            const email = document.getElementById("contact-email").value;
+            const message = document.getElementById("contact-message").value;
+            
+            if (name && email && message) {
+                // Clear form
+                document.getElementById("contact-form").reset();
+                
+                // Show success message
+                showSuccess();
+            } else {
+                alert("Please fill in all fields");
+            }
+        }
+    </script>
+</body>
+</html>

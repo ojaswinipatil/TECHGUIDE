@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechPATH - Personalized Learning Paths</title>
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --light-blue: #3b82f6;
+            --pale-blue: #dbeafe;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--white);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .intro h2 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .domains-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .domain-card {
+            background-color: var(--pale-blue);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .domain-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .domain-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .domain-features {
+            margin: 1.5rem 0;
+            padding-left: 1.2rem;
+        }
+        
+        .domain-features li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--light-blue);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-blue);
+        }
+        
+        .domain-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        
+        footer {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+        
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Form Styles */
+        .form-section {
+            background-color: var(--pale-blue);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 3rem auto;
+            max-width: 800px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-section h2 {
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary-blue);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--light-blue);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-submit {
+            text-align: center;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Technology Roadmap</h1>
+        <p>Your Personalized Path to Technology Expertise</p>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <div class="intro">
+            <h2>Choose Your Technology Learning Path</h2>
+            <p>Select from our carefully crafted learning paths tailored to help you master your desired technology domain.</p>
+        </div>
+        
+        <div class="domains-grid">
+            <!-- Software Development Card -->
+            <div class="domain-card">
+                <h3>Software Development</h3>
+                <p>Master the art of creating powerful, scalable applications.</p>
+                <ul class="domain-features">
+                    <li>Web Development (Frontend & Backend)</li>
+                    <li>Mobile App Development</li>
+                    <li>Cross-platform Solutions</li>
+                    <li>Modern Frameworks & Libraries</li>
+                </ul>
+                <div class="domain-buttons">
+                    <button class="btn view-path">View Learning Path</button>
+                </div>
+            </div>
+            
+            <!-- Cybersecurity Card -->
+            <div class="domain-card">
+                <h3>Cybersecurity</h3>
+                <p>Learn to protect systems and networks from digital attacks.</p>
+                <ul class="domain-features">
+                    <li>Ethical Hacking Techniques</li>
+                    <li>Security Analysis & Monitoring</li>
+                    <li>Vulnerability Assessment</li>
+                    <li>Incident Response Procedures</li>
+                </ul>
+                <div class="domain-buttons">
+                    <button class="btn view-path">View Learning Path</button>
+                </div>
+            </div>
+            
+            <!-- Data Science & AI Card -->
+            <div class="domain-card">
+                <h3>Data Science & AI</h3>
+                <p>Discover insights and build intelligent systems with data.</p>
+                <ul class="domain-features">
+                    <li>Machine Learning Algorithms</li>
+                    <li>Big Data Processing</li>
+                    <li>Data Visualization</li>
+                    <li>Predictive Analytics</li>
+                </ul>
+                <div class="domain-buttons">
+                    <button class="btn view-path">View Learning Path</button>
+                </div>
+            </div>
+            
+            <!-- Cloud Computing & DevOps Card -->
+            <div class="domain-card">
+                <h3>Cloud Computing & DevOps</h3>
+                <p>Build, deploy, and manage applications in the cloud.</p>
+                <ul class="domain-features">
+                    <li>AWS, Azure & Google Cloud</li>
+                    <li>Docker Containerization</li>
+                    <li>Kubernetes Orchestration</li>
+                    <li>CI/CD Pipeline Implementation</li>
+                </ul>
+                <div class="domain-buttons">
+                    <button class="btn view-path">View Learning Path</button>
+                </div>
+            </div>
+            
+            <!-- UI/UX Design Card -->
+            <div class="domain-card">
+                <h3>UI/UX Design</h3>
+                <p>Create beautiful, intuitive interfaces users will love.</p>
+                <ul class="domain-features">
+                    <li>User Interface Design Principles</li>
+                    <li>Graphic Design Fundamentals</li>
+                    <li>Prototyping & Wireframing</li>
+                    <li>User Research Methods</li>
+                </ul>
+                <div class="domain-buttons">
+                    <button class="btn view-path">View Learning Path</button>
+                </div>
+            </div>
+            
+            <!-- Internet of Things Card -->
+            <div class="domain-card">
+                <h3>Internet of Things (IoT)</h3>
+                <p>Connect the physical world with digital intelligence.</p>
+                <ul class="domain-features">
+                    <li>Smart Device Programming</li>
+                    <li>Embedded Systems</li>
+                    <li>Sensor Integration</li>
+                    <li>IoT Network Architecture</li>
+                </ul>
+                <div class="domain-buttons">
+                    <button class="btn view-path">View Learning Path</button>
+                </div>
+            </div>
+            
+            <!-- Networking & IT Infrastructure Card -->
+            <div class="domain-card">
+                <h3>Networking & IT Infrastructure</h3>
+                <p>Build and manage the backbone of modern technology.</p>
+                <ul class="domain-features">
+                    <li>System Administration</li>
+                    <li>Network Engineering</li>
+                    <li>Security Implementation</li>
+                    <li>Infrastructure Planning</li>
+                </ul>
+                <div class="domain-buttons">
+                    <button class="btn view-path">View Learning Path</button>
+                </div>
+            </div>
+            
+            <!-- IT Support & Helpdesk Card -->
+            <div class="domain-card">
+                <h3>IT Support & Helpdesk</h3>
+                <p>Solve technical problems and provide outstanding service.</p>
+                <ul class="domain-features">
+                    <li>Technical Support Best Practices</li>
+                    <li>System Troubleshooting</li>
+                    <li>Customer Service Skills</li>
+                    <li>Support Documentation</li>
+                </ul>
+                <div class="domain-buttons">
+                    <button class="btn view-path">View Learning Path</button>
+                </div>
+            </div>
+            
+            <!-- Game Development Card -->
+            <div class="domain-card">
+                <h3>Game Development</h3>
+                <p>Create immersive interactive experiences and games.</p>
+                <ul class="domain-features">
+                    <li>Game Design Principles</li>
+                    <li>Graphics Programming</li>
+                    <li>Game Physics & Mechanics</li>
+                    <li>Asset Creation & Management</li>
+                </ul>
+                <div class="domain-buttons">
+                    <button class="btn view-path">View Learning Path</button>
+                </div>
+            </div>
+            
+            <!-- Blockchain & Web3 Card -->
+            <div class="domain-card">
+                <h3>Blockchain & Web3</h3>
+                <p>Develop for the decentralized future of the internet.</p>
+                <ul class="domain-features">
+                    <li>Cryptocurrency Fundamentals</li>
+                    <li>Smart Contract Development</li>
+                    <li>Decentralized Applications</li>
+                    <li>Blockchain Security</li>
+                </ul>
+                <div class="domain-buttons">
+                    <button class="btn view-path">View Learning Path</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Custom Path Request Form Section -->
+        <div class="form-section">
+            <h2>Request a Custom Learning Path</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Need a personalized learning journey? Fill out the form below and we'll create a custom path just for you.</p>
+            
+            <form id="customPathForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="domain">Technology Domain</label>
+                    <select class="form-control" id="domain" required>
+                        <option value="">Select a domain</option>
+                        <option value="Software Development">Software Development</option>
+                        <option value="Cybersecurity">Cybersecurity</option>
+                        <option value="Data Science & AI">Data Science & AI</option>
+                        <option value="Cloud Computing & DevOps">Cloud Computing & DevOps</option>
+                        <option value="UI/UX Design">UI/UX Design</option>
+                        <option value="Internet of Things (IoT)">Internet of Things (IoT)</option>
+                        <option value="Networking & IT Infrastructure">Networking & IT Infrastructure</option>
+                        <option value="IT Support & Helpdesk">IT Support & Helpdesk</option>
+                        <option value="Game Development">Game Development</option>
+                        <option value="Blockchain & Web3">Blockchain & Web3</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="experience">Your Current Experience Level</label>
+                    <select class="form-control" id="experience" required>
+                        <option value="">Select your experience level</option>
+                        <option value="Beginner">Beginner (No experience)</option>
+                        <option value="Novice">Novice (Some basic knowledge)</option>
+                        <option value="Intermediate">Intermediate (Some practical experience)</option>
+                        <option value="Advanced">Advanced (Professional experience)</option>
+                        <option value="Expert">Expert (Deep expertise)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="goals">Learning Goals & Objectives</label>
+                    <textarea class="form-control" id="goals" placeholder="Describe what you want to achieve..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="timeframe">Preferred Timeframe</label>
+                    <select class="form-control" id="timeframe" required>
+                        <option value="">Select your timeframe</option>
+                        <option value="1-3 months">1-3 months</option>
+                        <option value="3-6 months">3-6 months</option>
+                        <option value="6-12 months">6-12 months</option>
+                        <option value="More than 12 months">More than 12 months</option>
+                    </select>
+                </div>
+                <div class="form-submit">
+                    <button type="submit" class="btn" id="submitCustomPath">Request Custom Path</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 TECHPATH. All rights reserved.</p>
+    </footer>
+    
+    <!-- Custom Path Confirmation Modal -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <h3>Request Submitted!</h3>
+            <p>You'll receive the path in some time.</p>
+            <button class="btn close-modal">Close</button>
+        </div>
+    </div>
+    
+    <!-- Learning Path Modal -->
+    <div class="modal" id="learningPathModal">
+        <div class="modal-content">
+            <h3 id="pathModalTitle">Learning Path</h3>
+            <div id="pathModalContent">
+                <p>Loading your personalized learning path...</p>
+            </div>
+            <button class="btn close-modal">Close</button>
+        </div>
+    </div>
+    
+    <script>
+        // Get form and modals
+        const customPathForm = document.getElementById('customPathForm');
+        const confirmationModal = document.getElementById('confirmationModal');
+        const learningPathModal = document.getElementById('learningPathModal');
+        const pathModalTitle = document.getElementById('pathModalTitle');
+        const pathModalContent = document.getElementById('pathModalContent');
+        
+        // Get all "View Learning Path" buttons
+        const viewPathButtons = document.querySelectorAll('.view-path');
+        
+        // Get all close modal buttons
+        const closeModalButtons = document.querySelectorAll('.close-modal');
+        
+        // Add event listener to the custom path form
+        customPathForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            confirmationModal.style.display = 'flex';
+            customPathForm.reset();
+        });
+        
+        // Add event listeners to "View Learning Path" buttons
+        viewPathButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const domainCard = e.target.closest('.domain-card');
+                const domainTitle = domainCard.querySelector('h3').textContent;
+                
+                // Update modal title
+                pathModalTitle.textContent = `${domainTitle} Learning Path`;
+                
+                // Generate some placeholder content based on the domain
+                let pathContent = `<p>Here's your personalized learning path for ${domainTitle}:</p>
+                                   <h4>Level 1: Fundamentals</h4>
+                                   <ul>
+                                       <li>Introduction to ${domainTitle}</li>
+                                       <li>Core concepts and terminology</li>
+                                       <li>Basic tools and technologies</li>
+                                   </ul>
+                                   <h4>Level 2: Building Skills</h4>
+                                   <ul>
+                                       <li>Hands-on projects and exercises</li>
+                                       <li>Industry best practices</li>
+                                       <li>Intermediate tools and frameworks</li>
+                                   </ul>
+                                   <h4>Level 3: Advanced Techniques</h4>
+                                   <ul>
+                                       <li>Complex problem-solving</li>
+                                       <li>Advanced methodologies</li>
+                                       <li>Real-world applications</li>
+                                   </ul>
+                                   <h4>Level 4: Specialization</h4>
+                                   <ul>
+                                       <li>Niche areas within ${domainTitle}</li>
+                                       <li>Cutting-edge technologies</li>
+                                       <li>Industry-specific implementation</li>
+                                   </ul>`;
+                
+                // Update modal content
+                pathModalContent.innerHTML = pathContent;
+                
+                // Show the modal
+                learningPathModal.style.display = 'flex';
+            });
+        });
+        
+        // Add event listeners to close modal buttons
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                confirmationModal.style.display = 'none';
+                learningPathModal.style.display = 'none';
+            });
+        });
+        
+        // Close modal when clicking outside of it
+        window.addEventListener('click', (e) => {
+            if (e.target === confirmationModal) {
+                confirmationModal.style.display = 'none';
+            }
+            if (e.target === learningPathModal) {
+                learningPathModal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
